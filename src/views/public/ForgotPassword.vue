@@ -3,26 +3,10 @@
     <a-row justify="center">
       <a-col>
         <Paragraph className="white-p-20" style="text-align: center;">Forgot Password</Paragraph>
-        <a-form
-          :model="forgotPasswordFormState"
-          name="basic"
-          :wrapper-col="{ span: 24 }"
-          autocomplete="off"
-          @finish="onFinish"
-          @finishFailed="onFinishFailed"
-        >
-          <a-form-item
-            name="username" 
-            class="overriden-seer-error-message"
-            :rules="[{ required: true, message: 'Please input your email.' }]"
-          >
-            <a-input
-              v-model:value="forgotPasswordFormState.username"
-              size="large"
-              placeholder="Email"
-            />
+        <a-form :model="forgotPasswordDto" name="forgotPassword" :wrapper-col="{ span: 24 }" autocomplete="off" @finish="onSubmit">
+          <a-form-item name="username" class="overriden-seer-error-message" :rules="[{ required: true, message: 'Please input your email.' }]">
+            <a-input v-model:value="forgotPasswordDto.email" size="large" placeholder="Email"/>
           </a-form-item>
-
           <a-form-item :wrapper-col="{ offset: 5, span: 16 }" style="margin-top: 33px">
             <Button className="white-black-auth" type="primary" html-type="submit">
               <Span className="gray100-span-20">Next</Span>
@@ -44,31 +28,19 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import { IForgotPasswordFormState, IErrorInfoFormState } from "@/views/types";
-import Button from "@/components/ui/Button.vue";
-import Paragraph from "@/components/ui/Paragraph.vue";
-import Span from "@/components/ui/Span.vue";
+import store from '@/store';
+import { IForgotPasswordDto } from "@/models/Auth";
+import { Button, Paragraph, Span } from "@/components/ui";
 
 export default defineComponent({
-  components: {
-    Button,
-    Paragraph,
-    Span
-  },
+  components: { Button, Paragraph, Span },
   setup() {
-    const forgotPasswordFormState = reactive<IForgotPasswordFormState>({
-      username: ""
-    });
-    const onFinish = (values: IForgotPasswordFormState) => {
-      console.log("Success:", values);
-    };
-    const onFinishFailed = (errorInfo: IErrorInfoFormState) => {
-      console.log("Failed:", errorInfo);
-    };
+    const forgotPasswordDto = reactive<IForgotPasswordDto>({ email: "" });
+    const onSubmit = async (forgotPasswordData: IForgotPasswordDto) => store.dispatch("auth/forgotPassword", forgotPasswordData);
+
     return {
-      forgotPasswordFormState,
-      onFinish,
-      onFinishFailed,
+      forgotPasswordDto,
+      onSubmit
     };
   },
 });
@@ -82,7 +54,6 @@ export default defineComponent({
   background-color: transparent;
 }
 
-/* override .ant-form-item-explain-error origin class from Ant Design View */
 .overriden-seer-error-message >>> .ant-form-item-explain-error {
   color: white;
 } 

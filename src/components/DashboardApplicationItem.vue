@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import Span from "@/components/ui/Span.vue";
-import { IDashboarApplicationItem } from "@/models/index";
+import { IDashboarApplicationItem } from "@/models/Dashboard";
 
 export default defineComponent({
   props: {

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import DashboardView from '../views/Dashboard.vue'
-import LoginView from '../views/public/LoginView.vue'
+import DashboardView from '../views/Dashboard/Dashboard.vue'
+import Login from '../views/public/Login.vue'
+import store from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -37,7 +38,7 @@ const routes: Array<RouteRecordRaw> = [
       layout: 'main-layout',
       title: 'Properties'
     },
-    component: () => import('../views/Properties.vue')
+    component: () => import('../views/Property/Properties.vue')
   },
   {
     path: '/tenants',
@@ -46,7 +47,7 @@ const routes: Array<RouteRecordRaw> = [
       layout: 'main-layout',
       title: 'Tenants'
     },
-    component: () => import('../views/Tenants.vue')
+    component: () => import('@/views/Tenant/Tenants.vue')
   },
   {
     path: '/leases',
@@ -55,7 +56,7 @@ const routes: Array<RouteRecordRaw> = [
       layout: 'main-layout',
       title: 'Leases'
     },
-    component: () => import('../views/Leases.vue')
+    component: () => import('../views/Lease/Leases.vue')
   },
   {
     path: '/reports',
@@ -91,7 +92,7 @@ const routes: Array<RouteRecordRaw> = [
       layout: 'main-layout',
       title: 'Notifications'
     },
-    component: () => import('@/views/Notifications.vue')
+    component: () => import('@/views/Notification/Notifications.vue')
   },
   {
     path: '/admins',
@@ -108,7 +109,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: 'public-layout'
     },
-    component: LoginView
+    component: Login
   },
   {
     path: '/register',
@@ -148,5 +149,16 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach(async (to) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  const publicPages = ['/login', '/register', '/forgot-password'];
+  const authRequired = !publicPages.includes(to.path);
+
+  const userFromStore = store.state.auth;
+  if (authRequired && !userFromStore) {
+    return '/login';
+  }
+});
 
 export default router

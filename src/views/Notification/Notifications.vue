@@ -3,26 +3,23 @@
     <a-row justify="center">
       <a-col class="notifications-column" :xs="20" :sm="12" :lg="10">
         <section>
-          <div v-if="computedNotifications.length > 0">
-            <div
-              v-for="notification in computedNotifications"
-              :key="notification.id"
-              style="padding: 16px; margin: 10px 0;">
+          <div v-if="notifications.length > 0">
+            <div v-for="notification in notifications" :key="notification.id" style="padding: 16px; margin: 10px 0;">
               <p>
                 <strong>{{ notification.id }}. </strong
                 ><strong>{{ notification.title }}</strong>
               </p>
               <p>{{ notification.body }}</p>
               <div style="display: flex; justify-content: center">
-                <Button className="white-black" type="dashed" @click="onDismissNotification">Dismiss</Button>
+                <Button className="white-black" type="dashed" @click="onDismiss(notification.id)">Dismiss</Button>
                 &nbsp;
                 <Button className="black-white" @click="onCreateReport">Create a report</Button>
               </div>
             </div>
           </div>
-          <Spin v-show="computedIsLoadingNotification" />
-          <div v-show="computedErrorNotification">
-            {{ computedErrorNotification }}
+          <Spin v-show="loadingNotification" />
+          <div v-show="errorNotification">
+            {{ errorNotification }}
           </div>
         </section>
       </a-col>
@@ -38,31 +35,26 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted } from "vue";
-import { useStore } from "vuex";
-import { IUserNotification } from "@/models";
-import Button from "@/components/ui/Button.vue";
-import Spin from "@/components/ui/Spin.vue";
+import store from '@/store';
+import { ServiseFactory } from "@/services/ServiseFactory";
+import { INotification } from "@/models/Notification/INotification";
+import { Button, Spin } from "@/components/ui";
 
 export default defineComponent({
   components: {
-    Button,
-    Spin
+    Button, Spin
   },
   setup() {
-    // const onDismissNotification = () => alert("Dismiss action is not implemented yet.");
-    // const onCreateReport = () => alert("Create a Report action is not implemented yet.");
+    const notificationService = ServiseFactory.getNotificationServise();
+    const onDismiss = (id: number) => notificationService.delete(id);
 
-    const store = useStore();
-
-    onMounted(() => {
-      store.dispatch('notifications/getAllNotifications')
-    })
+    onMounted(() => notificationService.getAll())
 
     return {
-      computedNotifications: computed<IUserNotification[]>(() => store.state.notifications.notifications),
-      computedErrorNotification: computed<string | null>(() => store.state.notifications.errorNotification),
-      computedIsLoadingNotification: computed<boolean>(() => store.state.notifications.isNotificationsLoading),
-      onDismissNotification: () => alert("Dismiss action is not implemented yet."),
+      notifications: computed<INotification[]>(() => store.state.notifications.notifications),
+      errorNotification: computed<string | null>(() => store.state.base.error),
+      loadingNotification: computed<boolean>(() => store.state.base.isLoading),
+      onDismiss,
       onCreateReport: () => alert("Create a Report action is not implemented yet.")
     };
   },

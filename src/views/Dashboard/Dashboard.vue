@@ -9,23 +9,13 @@
               <section class="dashboard-section">
                 <div style="display: flex; justify-content: space-between; align-items: center">
                   <div>
-                    <img
-                      src="/images/file_dock_search.svg"
-                      alt="numbers icon"
-                      style="margin: 0 10px 4px 0"
-                    />
+                    <img src="/images/file_dock_search.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
                     <Span className="gray80-span-20">Numbers</Span>
                   </div>
-                  <a href="#" @click="setNumbersAreVisible">{{
-                    numbersAreVisible ? "Hide" : "Show"
-                  }}</a>
+                    <a href="#" @click="setNumbersAreVisible">{{ numbersAreVisible ? "Hide" : "Show" }}</a>
                 </div>
                 <a-row justify="space-between" v-show="numbersAreVisible">
-                  <StatCard
-                    v-for="item in statisticNumbers"
-                    :statItem="item"
-                    :key="item.title"
-                  />
+                  <StatCard v-for="item in statisticNumbers" :statItem="item" :key="item.title" />
                 </a-row>
               </section>
             </a-col>
@@ -35,13 +25,7 @@
           <a-row justify="center">
             <a-col class="dashboard-column" :xs="24" :sm="24" :lg="24">
               <section class="dashboard-section">
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  "
-                >
+                <div style="display: flex; justify-content: space-between; align-items: center;">
                   <div>
                     <img src="/images/key_dashboard.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
                     <Span className="gray80-span-20">Your Properties</Span>
@@ -51,11 +35,7 @@
                   </router-link>
                 </div>
                 <a-row justify="space-between">
-                  <DashboardPropertyCard
-                    v-for="item in properties"
-                    :property="item"
-                    :key="item.id"
-                  />
+                  <DashboardPropertyCard v-for="item in properties" :property="item" :key="item.id" />
                 </a-row>
               </section>
             </a-col>
@@ -65,159 +45,84 @@
             <!-- Reports -->
             <a-col :xs="24" :md="12" :lg="12">
               <div class="left-card-dashboard">
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  "
-                >
+                <div style="display: flex; justify-content: space-between; align-items: center;">
                   <div>
-                    <img
-                      src="/images/reports_dashboard.svg"
-                      alt="numbers icon"
-                      style="margin: 0 10px 4px 0"
-                    />
+                    <img src="/images/reports_dashboard.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
                     <Span className="gray80-span-bold-16">Reports</Span>
                   </div>
                   <router-link to="/reports">
                     <Span className="orange-span-bold-12">See All</Span>
                   </router-link>
                 </div>
-                <DashboardReportItem
-                  v-for="item in reports"
-                  :report="item"
-                  :key="item.id"
-                />
+                <DashboardReportItem v-for="item in reports" :report="item" :key="item.id" />
               </div>
             </a-col>
             <!-- Applications -->
             <a-col :xs="24" :md="12" :lg="12">
               <div class="right-card-dashboard">
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  "
-                >
+                <div style="display: flex; justify-content: space-between; align-items: center;">
                   <div>
-                    <img
-                      src="/images/reports_dashboard.svg"
-                      alt="numbers icon"
-                      style="margin: 0 10px 4px 0"
-                    />
+                    <img src="/images/reports_dashboard.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
                     <Span className="gray80-span-bold-16">Applications</Span>
                   </div>
                   <router-link to="/applications">
                     <Span className="orange-span-bold-12">See All</Span>
                   </router-link>
                 </div>
-                <DashboardApplicationItem
-                  v-for="item in applications"
-                  :application="item"
-                  :key="item.id"
-                />
+                <DashboardApplicationItem v-for="item in applications" :application="item" :key="item.id" />
               </div>
             </a-col>
-          </a-row>
-
-          <a-row>
-            <section class="issues">
-              <ul style="padding: '0 20px'; list-style: none">
-                <li>
-                  Property-card: only 'Available now' status is designed. Which
-                  are other statuses and colors?.
-                </li>
-                <li>
-                  Reports-card: only 'Report Updated' status is designed. Which
-                  are other statuses and icons?.
-                </li>
-                <li>Reports-card: What does the 'Review' button?</li>
-                <li>
-                  Notifications - 3 kinds of notifications are designed with 'lorem ipsum' content, unknown destination and actions.
-                </li>
-              </ul>
-            </section>
           </a-row>
         </a-col>
 
         <!-- Notifications -->
         <a-col class="dashboard-column" :xs="24" :sm="24" :lg="7">
           <section class="dashboard-section">
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-              "
-            >
+            <div style=" display: flex; justify-content: space-between; align-items: center;">
               <div>
-                <img
-                  src="/images/reports_dashboard.svg"
-                  alt="numbers icon"
-                  style="margin: 0 10px 4px 0"
-                />
+                <img src="/images/reports_dashboard.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
                 <Span className="gray80-span-bold-16">Notifications</Span>
               </div>
               <router-link to="/notifications">
-                <Span
-                  className="orange-span-bold-12"
-                  style="cursor: pointer"
-                  >See All</Span
-                >
+                <Span className="orange-span-bold-12" style="cursor: pointer" >See All</Span >
               </router-link>
             </div>
-            <div v-if="computedNotifications.length > 0">
-              <div
-                v-for="notification in computedNotifications"
-                :key="notification.id"
-                style="border-radius: 8px; border: 1px solid rgba(7, 31, 55, 0.05); padding: 16px; margin: 10px 0;">
+            <Spin v-show="loadingNotification" />
+            <div v-show="errorNotification">
+              {{ errorNotification }}
+            </div>
+            <div v-if="notifications.length > 0">
+              <div v-for="notification in notifications" :key="notification.id" style="border-radius: 8px; border: 1px solid rgba(7, 31, 55, 0.05); padding: 16px; margin: 10px 0;">
                 <p>
                   <strong>{{ notification.id }}. </strong
                   ><strong>{{ notification.title }}</strong>
                 </p>
                 <p>{{ notification.body }}</p>
                 <div style="display: flex; justify-content: center">
-                  <Button
-                    className="white-black"
-                    type="dashed"
-                    @click="dismissNotification"
-                    >Dismiss</Button
-                  >
+                  <Button className="white-black" type="dashed" @click="onDismissNotification(notification.id)">Dismiss</Button >
                   &nbsp;
-                  <Button className="black-white" @click="createReport"
-                    >Create a report</Button
-                  >
+                  <Button className="black-white" @click="onClickGoToList" >Go to list</Button>
                 </div>
               </div>
-            </div>
-            <Spin v-show="computedIsLoadingNotification" />
-            <div v-show="computedErrorNotification">
-              {{ computedErrorNotification }}
             </div>
           </section>
         </a-col>
       </a-row>
-
-      
     </div>
-
-    
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
+import store from '@/store';
+import router from '@/router';
+import { INotification } from "@/models/Notification";
 import DashboardPropertyCard from "@/components/DashboardPropertyCard.vue";
 import DashboardReportItem from "@/components/DashboardReportItem.vue";
 import DashboardApplicationItem from "@/components/DashboardApplicationItem.vue";
-import Button from "@/components/ui/Button.vue";
-import Span from "@/components/ui/Span.vue";
-import Spin from "@/components/ui/Spin.vue";
+import { Button, Span, Spin } from "@/components/ui";
 import StatCard from "@/components/StatCard.vue";
-import { useStore } from "vuex";
-import { IUserNotification } from "@/models";
+import { ServiseFactory } from "@/services/ServiseFactory";
 
 const statisticNumbers = [
         { title: "Active Leases", amount: 15 },
@@ -290,24 +195,23 @@ export default defineComponent({
     StatCard,
   },
   setup() {
-    const dismissNotification = () => alert("Dismiss action is not implemented yet.");
-    const createReport = () => alert("Create a Report action is not implemented yet.");
+    const notificationService = ServiseFactory.getNotificationServise();
+    const onClickGoToList = () => router.push('/tenants');
     const showSeeAllAlert = () =>  alert("See all action is not implemented yet.");
 
     const numbersAreVisible = ref(true);
-    
-    const store = useStore();
 
-    onMounted(() => {
-      store.dispatch('notifications/getDashboardNotifications')
-    })
+    // actions
+    const onDismissNotification = (id: number) => notificationService.delete(id);
+
+    onMounted(() => notificationService.getAll());
 
     return {
-      computedNotifications: computed<IUserNotification[]>(() => store.state.notifications.notifications),
-      computedErrorNotification: computed<string | null>(() => store.state.notifications.errorNotification),
-      computedIsLoadingNotification: computed<boolean>(() => store.state.notifications.isNotificationsLoading),
-      createReport,
-      dismissNotification,
+      notifications: computed<INotification[]>(() => store.state.notifications.notifications.slice(0, 4)),
+      errorNotification: computed<string | null>(() => store.state.base.error),
+      loadingNotification: computed<boolean>(() => store.state.base.isLoading),
+      onClickGoToList,
+      onDismissNotification,
       numbersAreVisible,
       setNumbersAreVisible: () => numbersAreVisible.value = !numbersAreVisible.value,
       showSeeAllAlert,

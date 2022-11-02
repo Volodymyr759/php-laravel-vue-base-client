@@ -1,58 +1,20 @@
-import { IUserNotification } from "@/models"
-import { NotificationsState } from "./types"
-import { ActionContext } from "vuex"
-import { State } from './types'
-import { getNotificationsAxios } from '@/api/notifications'
-
-type Context = ActionContext<NotificationsState, State>;
+import { INotification } from "@/models/Notification/INotification";
+import { INotificationsState } from "./types";
 
 export default {
-    namespaced: true,
-    state: (): NotificationsState => ({
-        notifications: [],
-        isNotificationsLoading: false,
-        errorNotification: null
-    }),
-    getters: {},
-    mutations: {
-        setNotifications(state: NotificationsState, notifications: IUserNotification[]) {
-            state.notifications = notifications
-        },
-        setIsNotificationsLoading(state: NotificationsState, isLoading: boolean) {
-            state.isNotificationsLoading = isLoading
-        },
-        setError(state: NotificationsState, message: string) {
-            state.errorNotification = message
-        }
+  namespaced: true,
+  state: (): INotificationsState => ({
+    notifications: []
+  }),
+  getters: {},
+  mutations: {
+    removeNotification(state: INotificationsState, id: number) {
+      const index = state.notifications.findIndex((notification) => notification.id === id);
+      if (index >= 0) state.notifications.splice(index, 1);
     },
-    actions: {
-        async getAllNotifications(context: Context): Promise<IUserNotification[] | undefined> {
-            try {
-                context.commit('setError', null)
-                context.commit('setIsNotificationsLoading', true)
-                const notifications = await getNotificationsAxios(100) as IUserNotification[]
-                context.commit('setNotifications', notifications)
-                return context.state.notifications;
-            } catch (error) {
-                console.log('error in store: ', error)
-                context.commit('setError', error)
-            } finally {
-                context.commit('setIsNotificationsLoading', false)
-            }
-        },
-        async getDashboardNotifications(context: Context): Promise<IUserNotification[] | undefined> {
-            try {
-                context.commit('setError', null)
-                context.commit('setIsNotificationsLoading', true)
-                const notifications = await getNotificationsAxios(4) as IUserNotification[]
-                context.commit('setNotifications', notifications)
-                return context.state.notifications;
-            } catch (error) {
-                console.log('error in store: ', error)
-                context.commit('setError', error)
-            } finally {
-                context.commit('setIsNotificationsLoading', false)
-            }
-        }
+    setNotifications(state: INotificationsState, notifications: INotification[]) {
+      state.notifications = notifications;
     }
-}
+  },
+  actions: {},
+};

@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import Paragraph from "@/components/ui/Paragraph.vue";
-import { IStatisticsItem } from '@/models/index'
+import { IStatisticsItem } from '@/models/Dashboard'
 
 export default defineComponent({
   props: {

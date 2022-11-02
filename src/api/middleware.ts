@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import {ErrorStatus} from './types'
+import router from '@/router';
 
 export class AxiosMiddleware {
   static boot(): void {
@@ -11,10 +12,13 @@ export class AxiosMiddleware {
     },
       function (error) {
         switch (error.response.status) {
+          case ErrorStatus.Unauthorized:
+            router.push('/login');
+            throw new Error(ErrorStatus[401]);
           case ErrorStatus.Forbidden:
             throw new Error(ErrorStatus[403]);
           case ErrorStatus['Not Found']:
-            throw new Error(ErrorStatus[404]);
+            throw new Error(error.response.data.message || ErrorStatus[404]);
           default:
             throw new Error(ErrorStatus[500]);
         }

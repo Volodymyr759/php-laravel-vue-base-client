@@ -10,7 +10,6 @@
       <Paragraph className="white-p-26"> white-p-26 class </Paragraph>
     </section>
     <section style="background-color: white">
-
       <hr />
       <div style="text-align: center"><strong>Gray Spans</strong></div>
       <Span className="gray80-span-12"> gray80-span-12 class </Span>
@@ -48,8 +47,9 @@
       <Paragraph className="gray100-p-14"> gray100-p-14 class </Paragraph>
       <Paragraph className="gray80-p-16"> gray80-p-16 class </Paragraph>
       <Paragraph className="gray80-p-18"> gray80-p-18 class </Paragraph>
-      <Paragraph className="gray80-p-bold-18"> gray80-p-bold-18 class </Paragraph>
-      
+      <Paragraph className="gray80-p-bold-18">
+        gray80-p-bold-18 class
+      </Paragraph>
 
       <hr />
       <div style="text-align: center"><strong>Buttons</strong></div>
@@ -57,16 +57,22 @@
         <Button className="blue-white">blue-white small button</Button>
       </div>
       <div style="margin: 5px">
-        <Button className="blue-white" size="large">blue-white large button</Button>
+        <Button className="blue-white" size="large"
+          >blue-white large button</Button
+        >
       </div>
       <div style="margin: 5px">
         <Button className="black-white">black-white small button</Button>
       </div>
       <div style="margin: 5px">
-        <Button className="white-black" type="dashed">white-black small button</Button>
+        <Button className="white-black" type="dashed"
+          >white-black small button</Button
+        >
       </div>
       <div style="margin: 5px">
-        <Button className="white-black" type="dashed" size="large">white-black large button</Button>
+        <Button className="white-black" type="dashed" size="large"
+          >white-black large button</Button
+        >
       </div>
       <div style="margin: 5px">
         <Button className="white-black-auth" type="primary" html-type="submit">
@@ -74,10 +80,14 @@
         </Button>
       </div>
       <div style="margin: 5px">
-        <Button className="white-red" type="dashed">white-red small button</Button>
+        <Button className="white-red" type="dashed"
+          >white-red small button</Button
+        >
       </div>
       <div style="margin: 5px">
-        <Button className="white-blue" type="dashed">white-blue small button</Button>
+        <Button className="white-blue" type="dashed"
+          >white-blue small button</Button
+        >
       </div>
       <div style="margin: 5px">
         <Spin />
@@ -88,9 +98,17 @@
       <ul style="padding: 0 20px">
         <li><router-link to="/login">Login</router-link></li>
         <li><router-link to="/register">Register</router-link></li>
-        <li><router-link to="/forgot-password">Forgot Password</router-link></li>
-        <li><router-link to="/change-password">Change Password</router-link></li>
-        <li><router-link to="/link-confirmed">Verification Link Confirmed</router-link></li>
+        <li>
+          <router-link to="/forgot-password">Forgot Password</router-link>
+        </li>
+        <li>
+          <router-link to="/change-password">Change Password</router-link>
+        </li>
+        <li>
+          <router-link to="/link-confirmed"
+            >Verification Link Confirmed</router-link
+          >
+        </li>
       </ul>
     </section>
   </div>
@@ -99,7 +117,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Button from '@/components/ui/Button.vue'
+import Button from "@/components/ui/Button.vue";
 import Span from "@/components/ui/Span.vue";
 import Spin from "@/components/ui/Spin.vue";
 import Paragraph from "@/components/ui/Paragraph.vue";
@@ -108,7 +126,8 @@ export default defineComponent({
   components: {
     Button,
     Paragraph,
-    Span, Spin
+    Span,
+    Spin,
   },
 });
 </script>

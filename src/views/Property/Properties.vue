@@ -1,26 +1,18 @@
 <template>
   <div class="filters-wrapper">
-    <a-row style="margin: 0 84px; min-height: 72px; align-items: center; justify-content: space-between">
-      <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="8" style="margin: 5px; padding: 5px; text-align: center">
-        <a-input-search
-          v-model:value="search"
-          placeholder="Search"
-          style="width: 308px; height: 46px;"
-          size="large"
-          @search="onChangeSearchText"
-        />
-      </a-col>
-      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="7" style="margin: 5px; padding: 5px; text-align: center">
-        <a-select size="large" style="width: 200px" @change="onChangePropertyStatus" v-model:value="defaultPropertyStatus">
-          <a-select-option value="all">Properties: All</a-select-option>
-          <a-select-option :value="PropertyStatus.AVAILABLE">{{PropertyStatus.AVAILABLE}}</a-select-option>
-          <a-select-option :value="PropertyStatus.NOT_AVAILABLE">{{PropertyStatus.NOT_AVAILABLE}}</a-select-option>
-        </a-select>
-      </a-col>
-      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="7" style="margin: 5px; padding: 5px; text-align: center">
-        <Button className="blue-white" size="large" @click="onAddProperty">+ Add Property</Button>
-      </a-col>
-    </a-row>
+    <a-input-search
+      v-model:value="search"
+      placeholder="Search"
+      style="width: 308px;"
+      size="large"
+      @search="onChangeSearchText"
+    />
+    <a-select size="large" style="width: 200px" @change="onChangePropertyStatus" v-model:value="defaultPropertyStatus">
+      <a-select-option value="all">Properties: All</a-select-option>
+      <a-select-option :value="PropertyStatus.AVAILABLE">{{PropertyStatus.AVAILABLE}}</a-select-option>
+      <a-select-option :value="PropertyStatus.NOT_AVAILABLE">{{PropertyStatus.NOT_AVAILABLE}}</a-select-option>
+    </a-select>
+    <Button className="blue-white" size="large" @click="onAddProperty">+ Add Property</Button>
   </div>
   <div class="cards-wrapper">
     <a-row justify="center">
@@ -118,6 +110,7 @@ export default defineComponent({
 <style scoped>
 .cards-wrapper {
   margin: 12px 32px;
+  min-height: 100vh;
 }
 
 @media (max-width: 992px) {

@@ -1,30 +1,11 @@
 <template>
   <div class="filters-wrapper">
-    <a-row style="margin: 0 84px; min-height: 72px; align-items: center; justify-content: space-between">
-      <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="8" style="margin: 5px; padding: 5px;">
-        <a-input-search
-          v-model:value="searchText"
-          placeholder="Search"
-          style="width: 308px; height: 46px;"
-          size="large"
-          @search="onSearch"
-        />
-      </a-col>
-      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="7" style="margin: 5px; padding: 5px; text-align: center">
-        <a-select size="large" style="width: 200px" @change="handleChangeAppStatus" v-model:value="defaultAppStatus">
-          <a-select-option value="all">Applications: All</a-select-option>
-          <a-select-option value="denied">Denied</a-select-option>
-          <a-select-option value="approved">Approved</a-select-option>
-        </a-select>
-      </a-col>
-      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="7" style="margin: 5px; padding: 5px; text-align: center">
-        <a-select size="large" style="width: 200px" @change="handleChangePropertyStatus" v-model:value="defaultPropertyStatus">
-          <a-select-option value="all">Properties: All</a-select-option>
-          <a-select-option value="available">Available</a-select-option>
-          <a-select-option value="not_available">Not Available</a-select-option>
-        </a-select>
-      </a-col>
-    </a-row>
+    <a-input-search v-model:value="searchText" placeholder="Search" style="width: 308px;" size="large" @search="onSearch"/>
+    <a-select size="large" style="width: 200px" @change="handleChangeAppStatus" v-model:value="defaultAppStatus">
+      <a-select-option value="all">Applications: All</a-select-option>
+      <a-select-option value="denied">Denied</a-select-option>
+      <a-select-option value="approved">Approved</a-select-option>
+    </a-select>
   </div>
   <div class="table-wrapper">
     <a-row justify="center">
@@ -46,45 +27,41 @@
               </a>
             </template>
             <template v-else-if="column.key === 'lease'">
-              <img :src="'https://picsum.photos/200/300?random=' + record.key" alt="photo" width="65" height="37" />
+              <img :src="'https://picsum.photos/200/300?random=' + record.key" alt="photo" class="lease-image"/>
               <span>&nbsp;&nbsp;&nbsp;{{ record.lease }}</span>
             </template>
             <template v-else-if="column.key === 'applicant'">
               <a-avatar size="large" :src="record.applicant" />
             </template>
             <template v-else-if="column.key === 'actionsStatus'">
-              <div v-if="record.actionsStatus === 'Requested'" style="text-align: center">
+              <div v-if="record.actionsStatus === 'Requested'" class="text-align-center">
                 <Button className="white-red" type="dashed" @click="onDenyRequest(record.key)">Deny Request</Button>&nbsp;
                 <Button className="white-blue" type="dashed" @click="onApproveRequest(record.key)">Approve Request</Button>
               </div>
-              <div v-else-if="record.actionsStatus === 'Approved'"  style="text-align: center">
-                <img src="/images/green_circle.svg" alt="green circle" style="margin: 0 8px 3px 0"/>{{record.actionsStatus}}
+              <div v-else-if="record.actionsStatus === 'Approved'" class="text-align-center">
+                <img src="/images/green_circle.svg" alt="green circle" class="circle-item" />{{record.actionsStatus}}
               </div>
-              <div v-else style="text-align: center">
-                <img src="/images/red_ellipse.svg" alt="red ellipse" style="margin: 0 8px 3px 0"/>{{record.actionsStatus}}
+              <div v-else class="text-align-center">
+                <img src="/images/red_ellipse.svg" alt="red ellipse" class="circle-item"/>{{record.actionsStatus}}
               </div>
             </template>
             <template v-else-if="column.key === 'chat'">
-              <div style="text-align: center; cursor: pointer;">
-                <img src="/images/chat.svg" alt="chat" /><img src="/images/right_arrow.svg" alt="arrow" />
+              <div class="chat">
+                <img src="/images/chat.svg" alt="chat" />
+                <img src="/images/right_arrow.svg" alt="arrow" />
               </div>
             </template>
           </template>
         </a-table>
       </a-col>
     </a-row>
-    <!-- <section class="issues">
-      <ul style="padding: '0 20px'; list-style: none;">
-        <li>List of possible statuses for properties selector - ?</li>
-      </ul>
-    </section> -->
   </div>
   
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import Button from '@/components/ui/Button.vue'
+import Button from "@/components/ui/Button.vue";
 
 // read more about sorting fields of table: https://www.antdv.com/components/table/#Table
 type TableDataType = {
@@ -97,7 +74,8 @@ const columns = [
     title: "LEASE",
     dataIndex: "lease",
     key: "lease",
-    sorter: (a: TableDataType, b: TableDataType) => a.lease.length - b.lease.length,
+    sorter: (a: TableDataType, b: TableDataType) =>
+      a.lease.length - b.lease.length,
   },
   {
     title: "APPLICANT",
@@ -226,14 +204,14 @@ const data = [
 
 export default defineComponent({
   components: {
-    Button
+    Button,
   },
   setup() {
-    const searchText = ref<string>('');
-    const applicationsFilter = ref<string>('all');
+    const searchText = ref<string>("");
+    const applicationsFilter = ref<string>("all");
     const onSearch = (searchValue: string) => {
-      console.log('use value', searchValue);
-      console.log('or use this.value', searchText.value);
+      console.log("use value", searchValue);
+      console.log("or use this.value", searchText.value);
     };
 
     const handleChangeAppStatus = (value: string) => {
@@ -241,34 +219,41 @@ export default defineComponent({
     };
 
     const computedData = computed(() => {
-      return applicationsFilter.value === 'all'? data: [...data].filter((app) => app.actionsStatus.toLowerCase() === applicationsFilter.value )
-    })
-
-    const handleChangePropertyStatus = (value: string) => {
-      console.log(`selected property status: ${value}`);
-    };
+      return applicationsFilter.value === "all"
+        ? data
+        : [...data].filter(
+            (app) =>
+              app.actionsStatus.toLowerCase() === applicationsFilter.value
+          );
+    });
 
     return {
       data,
       columns,
       computedData,
       searchText,
-      onApproveRequest: (id: string) => alert(`Approve Request button has been clicked, id: ${id}`),
-      onDenyRequest: (id: string) => alert(`Deny Request button has been clicked, id: ${id}`),
+      onApproveRequest: (id: string) =>
+        alert(`Approve Request button has been clicked, id: ${id}`),
+      onDenyRequest: (id: string) =>
+        alert(`Deny Request button has been clicked, id: ${id}`),
       onSearch,
       pagination: {
         size: "small",
         hideOnSinglePage: true,
         defaultPageSize: 10,
-        position: ["bottomCenter"]
+        position: ["bottomCenter"],
       },
-      defaultAppStatus: ref('all'),
-      defaultPropertyStatus: ref('all'),
+      defaultAppStatus: ref("all"),
+      defaultPropertyStatus: ref("all"),
       handleChangeAppStatus,
-      handleChangePropertyStatus
     };
   },
 });
 </script>
 
-
+<style scoped>
+.lease-image {
+  width: 65px;
+  height: 37px;
+}
+</style>

@@ -8,9 +8,15 @@
     </a-row>
   </div>
   <section class="issues">
-    <ul :style="{ padding: '0 20px' }">
+    <ul id="issues-list">
       <li>Not designed</li>
       <li>No content</li>
     </ul>
   </section>
 </template>
+
+<style scoped>
+#issues-list {
+  padding: 0 20px;
+}
+</style>

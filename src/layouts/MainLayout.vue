@@ -1,18 +1,18 @@
 <template>
   <section>
     <!-- Top Menu -->
-    <section class="flex-row flex-space-between" :style="{ background: '#1976D2' }">
+    <section class="flex-row flex-space-between" id="main-section" >
       <div>
-        <router-link to="/" :style="{ margin: '0 20px' }">
-          <img src="/images/logo_new.svg" alt="logo" width="126" height="25" />
+        <router-link to="/" id="main-link">
+          <img src="/images/logo_new.svg" alt="logo" id="logo" />
         </router-link>
       </div>
-      <Paragraph className="white-p-26" style="margin: 0">{{ title }}</Paragraph>
+      <Paragraph className="white-p-26">{{ title }}</Paragraph>
       <div>
         <nav>
           <a-dropdown>
-            <img src="/images/main_menu_avatar.svg" alt="avatar" width="32" height="32" />
-            <a class="ant-dropdown-link" style="color: 'white'; text-size: 2.5em" @click.prevent >
+            <img src="/images/main_menu_avatar.svg" alt="avatar" id="avatar" />
+            <a class="ant-dropdown-link" id="avatar-link" @click.prevent >
               <DownOutlined />
             </a>
             <template #overlay>
@@ -21,7 +21,6 @@
                   <router-link to="/profile">Profile</router-link>
                 </a-menu-item>
                 <a-menu-item>
-                  <!-- <router-link to="/login">Log Out</router-link> -->
                   <Paragraph className="gray100-p-14" @click="onLogout">Log Out</Paragraph>
                 </a-menu-item>
               </a-menu>
@@ -67,11 +66,11 @@
             <Span className="gray80-span-12">© 2022 PropTech - All Rights Reserved.</Span>
           </div>
           <div>
-            <Span className="gray80-span-12" style="cursor: pointer" @click="modalPrivacyPolicyVisible = true">
+            <Span className="gray80-span-12" class="privacy-and-terms" @click="modalPrivacyPolicyVisible = true">
               Privacy Policy
             </Span>
             |
-            <Span className="gray80-span-12" style="cursor: pointer" @click="modalTermsOfServiceVisible = true">
+            <Span className="gray80-span-12" class="privacy-and-terms" @click="modalTermsOfServiceVisible = true">
               Terms of Service
             </Span>
           </div>
@@ -106,7 +105,7 @@ export default defineComponent({
     Paragraph,
     PrivacyPolicy,
     Span,
-    TermsOfService
+    TermsOfService,
   },
   setup() {
     const modalPrivacyPolicyVisible = ref(false);
@@ -114,14 +113,14 @@ export default defineComponent({
 
     const store = useStore();
     const onLogout = () => {
-      store.dispatch('auth/logout')
-    }
+      store.dispatch("auth/logout");
+    };
 
     return {
       modalPrivacyPolicyVisible,
       modalTermsOfServiceVisible,
       onLogout,
-      sideMenuList
+      sideMenuList,
     };
   },
 });
@@ -134,5 +133,32 @@ export default defineComponent({
   height: 100vh;
   background: #ffffff;
   box-shadow: 1px 1px 5px rgba(26, 39, 37, 0.07);
+}
+
+#logo {
+  width: 126px;
+  height: 25px;
+}
+
+#main-section {
+  background: #1976d2;
+}
+
+#main-link {
+  margin: 0 20px;
+}
+
+#avatar {
+  width: 32px;
+  height: 32px;
+}
+
+#avatar-link {
+  color: white;
+  font-size: 2.5em;
+}
+
+.privacy-and-terms {
+  cursor: pointer;
 }
 </style>

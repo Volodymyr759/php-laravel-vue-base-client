@@ -16,7 +16,7 @@
   </Paragraph>
   <Paragraph className="gray80-p-18">Definitions</Paragraph>
   <Paragraph className="gray80-p-16">For the purposes of these Terms and Conditions:</Paragraph>
-  <ul style="margin-left: 25px">
+  <ul id="terms">
     <li>
       <Span className="gray80-span-bold-16">Account</Span>
       <Span className="gray80-span-16">
@@ -56,7 +56,13 @@ import Paragraph from "@/components/ui/Paragraph.vue";
 export default defineComponent({
   components: {
     Paragraph,
-    Span
+    Span,
   },
 });
 </script>
+
+<style scoped>
+#terms {
+  margin-left: 25px;
+}
+</style>

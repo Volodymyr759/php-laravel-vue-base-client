@@ -10,7 +10,7 @@
     </Paragraph>
     <Paragraph className="gray80-p-bold-18">Interpretation and Definitions</Paragraph>
     <Paragraph className="gray80-p-18">Definitions</Paragraph>
-    <ul style="margin-left: 25px">
+    <ul id="definitions">
       <li>
         <Span className="gray80-span-bold-16">Account</Span>
         <Span className="gray80-span-16">
@@ -52,7 +52,13 @@ import Paragraph from "@/components/ui/Paragraph.vue";
 export default defineComponent({
   components: {
     Paragraph,
-    Span
+    Span,
   },
 });
 </script>
+
+<style scoped>
+#definitions {
+  margin-left: 25px;
+}
+</style>

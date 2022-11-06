@@ -1,16 +1,16 @@
 <template>
-  <div style="margin: 24px auto;">
+  <div id="notification-wrapper">
     <a-row justify="center">
       <a-col class="notifications-column" :xs="20" :sm="12" :lg="10">
         <section>
           <div v-if="notifications.length > 0">
-            <div v-for="notification in notifications" :key="notification.id" style="padding: 16px; margin: 10px 0;">
+            <div v-for="notification in notifications" :key="notification.id" class="notification-item">
               <p>
                 <strong>{{ notification.id }}. </strong
                 ><strong>{{ notification.title }}</strong>
               </p>
               <p>{{ notification.body }}</p>
-              <div style="display: flex; justify-content: center">
+              <div class="notification-item-footer">
                 <Button className="white-black" type="dashed" @click="onDismiss(notification.id)">Dismiss</Button>
                 &nbsp;
                 <Button className="black-white" @click="onCreateReport">Create a report</Button>
@@ -24,38 +24,42 @@
         </section>
       </a-col>
     </a-row>
-    <section class="issues">
+    <!-- <section class="issues">
       <ul :style="{ padding: '0 20px' }">
         <li>Should be pagination here ?</li>
         <li>3 kinds of notifications are designed with 'lorem ipsum' content, unknown destination and actions.</li>
       </ul>
-  </section>
+    </section> -->
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onMounted } from "vue";
-import store from '@/store';
+import store from "@/store";
 import { ServiseFactory } from "@/services/ServiseFactory";
 import { INotification } from "@/models/Notification/INotification";
 import { Button, Spin } from "@/components/ui";
 
 export default defineComponent({
   components: {
-    Button, Spin
+    Button,
+    Spin,
   },
   setup() {
     const notificationService = ServiseFactory.getNotificationServise();
     const onDismiss = (id: number) => notificationService.delete(id);
 
-    onMounted(() => notificationService.getAll())
+    onMounted(() => notificationService.getAll());
 
     return {
-      notifications: computed<INotification[]>(() => store.state.notifications.notifications),
+      notifications: computed<INotification[]>(
+        () => store.state.notifications.notifications
+      ),
       errorNotification: computed<string | null>(() => store.state.base.error),
       loadingNotification: computed<boolean>(() => store.state.base.isLoading),
       onDismiss,
-      onCreateReport: () => alert("Create a Report action is not implemented yet.")
+      onCreateReport: () =>
+        alert("Create a Report action is not implemented yet."),
     };
   },
 });
@@ -67,5 +71,19 @@ export default defineComponent({
   border: 1px solid rgba(7, 31, 55, 0.05);
   box-shadow: 0px 0px 5px rgba(26, 39, 37, 0.05);
   border-radius: 10px;
+}
+
+#notification-wrapper {
+  margin: 24px auto;
+}
+
+.notification-item {
+  padding: 16px;
+  margin: 10px 0;
+}
+
+.notification-item-footer {
+  display: flex;
+  justify-content: center;
 }
 </style>

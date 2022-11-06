@@ -1,7 +1,7 @@
 <template>
   <div class="side-menu-item">
-      <router-link :to="menuItem.linkTo" style="color: #455a64">
-        <img :src="menuItem.imageSrc" :alt="menuItem.altText" :style="{ margin: '0 24px 7px 24px' }"/>
+      <router-link :to="menuItem.linkTo" class="link-to">
+        <img :src="menuItem.imageSrc" :alt="menuItem.altText" class="image-link-to"/>
         <p class="menu-item-text">{{ menuItem.title }}</p>
       </router-link>
     </div>
@@ -35,5 +35,13 @@ export default defineComponent({
   line-height: 140%;
   text-align: center;
   margin: auto;
+}
+
+.link-to {
+  color: #455a64;
+}
+
+.image-link-to {
+  margin: 0 24px 7px 24px;
 }
 </style>

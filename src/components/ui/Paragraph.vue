@@ -12,14 +12,14 @@ export default defineComponent({
     className: {
       type: String,
       required: true,
-    }
-  }
+    },
+  },
 });
 </script>
 
 <style scoped>
 .blue-p-16 {
-  color: #1976D2;
+  color: #1976d2;
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
@@ -49,19 +49,21 @@ export default defineComponent({
   line-height: 140%;
 }
 .white-p-26 {
+  margin: 0;
   color: white;
   font-weight: 600;
   font-size: 26px;
   line-height: 140%;
 }
 .orange-p-46 {
-  color: #F56900;
+  color: #f56900;
+  margin-bottom: 4px;
   font-weight: 700;
   font-size: 42px;
   line-height: 53px;
 }
 .gray100-p-14 {
-  color: #071F37;
+  color: #071f37;
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;

@@ -2,8 +2,8 @@
   <div class="auth-form-wrapper">
     <a-row justify="center">
       <a-col>
-        <Paragraph className="white-p-20" style="text-align: center;">Welcome to</Paragraph>
-        <div style="text-align: center; margin-bottom: 25px">
+        <Paragraph className="white-p-20" class="text-align-center">Welcome to</Paragraph>
+        <div id="welcome">
           <img src="/images/logo.svg" alt="logo" width="126" height="25" />
         </div>
         <a-form :model="registerDto" name="registerDto" :wrapper-col="{ span: 24 }" autocomplete="off" @finish="onSubmit">
@@ -32,19 +32,24 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import store from '@/store';
+import store from "@/store";
 import { IRegisterDto } from "@/models/Auth";
 import { Button, Paragraph, Span } from "@/components/ui";
 
 export default defineComponent({
   components: { Button, Paragraph, Span },
   setup() {
-    const registerDto = reactive<IRegisterDto>({ username: "", password: "", passwordConfirm: "" });
-    const onSubmit = async (registerData: IRegisterDto) => store.dispatch("auth/register", registerData);
+    const registerDto = reactive<IRegisterDto>({
+      username: "",
+      password: "",
+      passwordConfirm: "",
+    });
+    const onSubmit = async (registerData: IRegisterDto) =>
+      store.dispatch("auth/register", registerData);
 
     return {
       registerDto,
-      onSubmit
+      onSubmit,
     };
   },
 });
@@ -61,5 +66,10 @@ export default defineComponent({
 /* override .ant-form-item-explain-error origin class from Ant Design View */
 .overriden-seer-error-message >>> .ant-form-item-explain-error {
   color: white;
+}
+
+#welcome {
+  text-align: center;
+  margin-bottom: 25px;
 }
 </style>

@@ -7,9 +7,9 @@
           <a-row justify="center">
             <a-col class="dashboard-column" :xs="24" :sm="24" :lg="24">
               <section class="dashboard-section">
-                <div style="display: flex; justify-content: space-between; align-items: center">
+                <div id="numbers-header">
                   <div>
-                    <img src="/images/file_dock_search.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
+                    <img src="/images/file_dock_search.svg" alt="numbers icon" class="section-icon"/>
                     <Span className="gray80-span-20">Numbers</Span>
                   </div>
                     <a href="#" @click="setNumbersAreVisible">{{ numbersAreVisible ? "Hide" : "Show" }}</a>
@@ -25,9 +25,9 @@
           <a-row justify="center">
             <a-col class="dashboard-column" :xs="24" :sm="24" :lg="24">
               <section class="dashboard-section">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="dashboard-section-wrapper">
                   <div>
-                    <img src="/images/key_dashboard.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
+                    <img src="/images/key_dashboard.svg" alt="numbers icon" class="section-icon"/>
                     <Span className="gray80-span-20">Your Properties</Span>
                   </div>
                   <router-link to="/properties">
@@ -45,9 +45,9 @@
             <!-- Reports -->
             <a-col :xs="24" :md="12" :lg="12">
               <div class="left-card-dashboard">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="dashboard-section-wrapper">
                   <div>
-                    <img src="/images/reports_dashboard.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
+                    <img src="/images/reports_dashboard.svg" alt="numbers icon" class="section-icon"/>
                     <Span className="gray80-span-bold-16">Reports</Span>
                   </div>
                   <router-link to="/reports">
@@ -60,9 +60,9 @@
             <!-- Applications -->
             <a-col :xs="24" :md="12" :lg="12">
               <div class="right-card-dashboard">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="dashboard-section-wrapper">
                   <div>
-                    <img src="/images/reports_dashboard.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
+                    <img src="/images/reports_dashboard.svg" alt="numbers icon" class="section-icon"/>
                     <Span className="gray80-span-bold-16">Applications</Span>
                   </div>
                   <router-link to="/applications">
@@ -78,13 +78,13 @@
         <!-- Notifications -->
         <a-col class="dashboard-column" :xs="24" :sm="24" :lg="7">
           <section class="dashboard-section">
-            <div style=" display: flex; justify-content: space-between; align-items: center;">
+            <div class="dashboard-section-wrapper">
               <div>
-                <img src="/images/reports_dashboard.svg" alt="numbers icon" style="margin: 0 10px 4px 0" />
+                <img src="/images/reports_dashboard.svg" alt="numbers icon" class="section-icon"/>
                 <Span className="gray80-span-bold-16">Notifications</Span>
               </div>
               <router-link to="/notifications">
-                <Span className="orange-span-bold-12" style="cursor: pointer" >See All</Span >
+                <Span className="orange-span-bold-12">See All</Span >
               </router-link>
             </div>
             <Spin v-show="loadingNotification" />
@@ -92,13 +92,12 @@
               {{ errorNotification }}
             </div>
             <div v-if="notifications.length > 0">
-              <div v-for="notification in notifications" :key="notification.id" style="border-radius: 8px; border: 1px solid rgba(7, 31, 55, 0.05); padding: 16px; margin: 10px 0;">
+              <div v-for="notification in notifications" :key="notification.id" class="notification-card">
                 <p>
-                  <strong>{{ notification.id }}. </strong
-                  ><strong>{{ notification.title }}</strong>
+                  <strong>{{ notification.id }}. </strong><strong>{{ notification.title }}</strong>
                 </p>
                 <p>{{ notification.body }}</p>
-                <div style="display: flex; justify-content: center">
+                <div class="notification-card-footer">
                   <Button className="white-black" type="dashed" @click="onDismissNotification(notification.id)">Dismiss</Button >
                   &nbsp;
                   <Button className="black-white" @click="onClickGoToList" >Go to list</Button>
@@ -114,8 +113,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
-import store from '@/store';
-import router from '@/router';
+import store from "@/store";
+import router from "@/router";
 import { INotification } from "@/models/Notification";
 import DashboardPropertyCard from "@/components/DashboardPropertyCard.vue";
 import DashboardReportItem from "@/components/DashboardReportItem.vue";
@@ -125,63 +124,63 @@ import StatCard from "@/components/StatCard.vue";
 import { ServiseFactory } from "@/services/ServiseFactory";
 
 const statisticNumbers = [
-        { title: "Active Leases", amount: 15 },
-        { title: "Completed Leases", amount: 3450 },
-        { title: "Properties", amount: 2570 },
-        { title: "New Requests", amount: 1 },
-      ]
+  { title: "Active Leases", amount: 15 },
+  { title: "Completed Leases", amount: 3450 },
+  { title: "Properties", amount: 2570 },
+  { title: "New Requests", amount: 1 },
+];
 
 const properties = [
-        {
-          id: "q1",
-          imgSrc: "/images/test_property1.png",
-          name: "Maldives",
-          address: "Crown Beach House Maldives",
-          status: "Available Now",
-          bathrooms: 1,
-          beds: 2,
-          area: 36000,
-          price: 598,
-        },
-        {
-          id: "q2",
-          imgSrc: "/images/test_property2.png",
-          name: "Maldives",
-          address: "Crown Beach House Maldives",
-          status: "Available Now",
-          bathrooms: 1,
-          beds: 2,
-          area: 36000,
-          price: 598,
-        },
-      ]
+  {
+    id: "1",
+    imgSrc: "/images/test_property1.png",
+    name: "Maldives",
+    address: "Crown Beach House Maldives",
+    status: "Available Now",
+    baths: 1,
+    beds: 2,
+    square: 36000,
+    price: 598,
+  },
+  {
+    id: "2",
+    imgSrc: "/images/test_property2.png",
+    name: "Maldives",
+    address: "Crown Beach House Maldives",
+    status: "Available Now",
+    baths: 1,
+    beds: 2,
+    square: 36000,
+    price: 598,
+  },
+];
 
 const reports = [
-        { id: "q1", created_at: "2020-06-24", status: "Report Updated" },
-        { id: "q2", created_at: "2021-01-15", status: "Report Updated" },
-        { id: "q3", created_at: "2022-05-30", status: "Report Updated" },
-      ]
+  { id: "q1", created_at: "2020-06-24", status: "Report Updated" },
+  { id: "q2", created_at: "2021-01-15", status: "Report Updated" },
+  { id: "q3", created_at: "2022-05-30", status: "Report Updated" },
+];
 
 const applications = [
-        {
-          id: "q1",
-          created_at: "2020-06-24",
-          address: "Crown Beach House Maldives",
-          status: "New",
-        },
-        {
-          id: "q2",
-          created_at: "2021-01-15",
-          address: "Crown Beach House Maldives",
-          status: "New",
-        },
-        {
-          id: "q3",
-          created_at: "2022-05-30",
-          address: "Crown Beach House Maldives",
-          status: "New",
-        },
-      ]
+  {
+    id: "q1",
+    created_at: "2020-06-24",
+    address: "Crown Beach House Maldives",
+    status: "New",
+  },
+  {
+    id: "q2",
+    created_at: "2021-01-15",
+    address: "Crown Beach House Maldives",
+    status: "New",
+  },
+  {
+    id: "q3",
+    created_at: "2022-05-30",
+    address: "Crown Beach House Maldives",
+    status: "New",
+  },
+];
 
 export default defineComponent({
   name: "DashboardView",
@@ -196,28 +195,36 @@ export default defineComponent({
   },
   setup() {
     const notificationService = ServiseFactory.getNotificationServise();
-    const onClickGoToList = () => router.push('/tenants');
-    const showSeeAllAlert = () =>  alert("See all action is not implemented yet.");
+    const onClickGoToList = () => router.push("/notifications");
+    const showSeeAllAlert = () =>
+      alert("See all action is not implemented yet.");
 
     const numbersAreVisible = ref(true);
 
     // actions
-    const onDismissNotification = (id: number) => notificationService.delete(id);
+    const onDismissNotification = (id: number) =>
+      notificationService.delete(id);
 
     onMounted(() => notificationService.getAll());
 
     return {
-      notifications: computed<INotification[]>(() => store.state.notifications.notifications.slice(0, 4)),
+      notifications: computed<INotification[]>(() =>
+        store.state.notifications.notifications.slice(0, 4)
+      ),
       errorNotification: computed<string | null>(() => store.state.base.error),
       loadingNotification: computed<boolean>(() => store.state.base.isLoading),
       onClickGoToList,
       onDismissNotification,
       numbersAreVisible,
-      setNumbersAreVisible: () => numbersAreVisible.value = !numbersAreVisible.value,
+      setNumbersAreVisible: () =>
+        (numbersAreVisible.value = !numbersAreVisible.value),
       showSeeAllAlert,
-      statisticNumbers, properties, reports, applications
-    }
-  }
+      statisticNumbers,
+      properties,
+      reports,
+      applications,
+    };
+  },
 });
 </script>
 
@@ -228,6 +235,16 @@ export default defineComponent({
 
 .dashboard-column {
   margin: 0 8px 8px 8px;
+}
+
+#numbers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-icon {
+  margin: 0 10px 4px 0;
 }
 
 .report-item {
@@ -260,6 +277,18 @@ export default defineComponent({
   box-shadow: 0px 0px 5px rgba(26, 39, 37, 0.05);
   border-radius: 10px;
   margin-left: 8px;
+}
+
+.notification-card {
+  border-radius: 8px;
+  border: 1px solid rgba(7, 31, 55, 0.05);
+  padding: 16px;
+  margin: 10px 0;
+}
+
+.notification-card-footer {
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {

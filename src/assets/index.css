@@ -34,6 +34,18 @@ nav {
   align-items: center;
 }
 
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
 .page-body {
   justify-content: space-between;
   align-items: flex-start;
@@ -74,8 +86,27 @@ nav {
   border-radius: 10px;
 }
 
+.dashboard-section-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-card-image {
+  width: 100%;
+}
+
 .auth-form-wrapper {
   margin-top: 85px;
+}
+
+.circle-item {
+  margin: 0 8px 3px 0;
+}
+
+.chat {
+  text-align: center;
+  cursor: pointer;
 }
 
 .issues {

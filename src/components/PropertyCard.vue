@@ -1,8 +1,7 @@
 <template>
   <a-col class="property-card-wrapper" :xs="24" :sm="11" :md="11" :lg="7">
     <div>
-      <!-- <img v-bind:src="property.imgSrc" alt="property photo" style="width: 100%" /> -->
-      <img src="/images/test_property1.png" alt="property photo" style="width: 100%" />
+      <img src="/images/test_property1.png" alt="property photo" class="dashboard-card-image"/>
       <br />
       <img src="/images/home_dashboard.svg" alt="home icon" />
       <Span className="gray80-span-16">
@@ -47,14 +46,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
 .property-card-wrapper {
   margin: 12px;
 }
 
 @media (max-width: 992px) {
   .property-card-wrapper {
-  margin: 12px 4px;
-}
+    margin: 12px 4px;
+  }
 }
 </style>

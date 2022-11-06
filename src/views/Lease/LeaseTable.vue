@@ -6,38 +6,38 @@
       </template>
       <template v-else-if="column.key === 'status'">
         <div v-if="record.status === LeaseStatus.REQUESTED" >
-          <img src="/images/orange_circle.svg" alt="green circle" style="margin: 0 8px 3px 0" />
+          <img src="/images/orange_circle.svg" alt="green circle" class="circle-item"/>
           {{ record.status }}
         </div>
         <div v-else-if="record.status === LeaseStatus.APPROVED">
-          <img src="/images/yellow_circle.svg" alt="red ellipse" style="margin: 0 8px 3px 0" />
+          <img src="/images/yellow_circle.svg" alt="red ellipse" class="circle-item"/>
           {{ record.status }}
         </div>
         <div v-else-if="record.status === LeaseStatus.IN_PROGRESS">
-          <img src="/images/green_circle.svg" alt="red ellipse" style="margin: 0 8px 3px 0" />
+          <img src="/images/green_circle.svg" alt="red ellipse" class="circle-item"/>
           {{ record.status }}
         </div>
         <div v-else-if="record.status === LeaseStatus.REJECTED">
-          <img src="/images/red_ellipse.svg" alt="red ellipse" style="margin: 0 8px 3px 0" />
+          <img src="/images/red_ellipse.svg" alt="red ellipse" class="circle-item"/>
           {{ record.status }}
         </div>
         <div v-else-if="record.status === LeaseStatus.COMPLETED">
-          <img src="/images/blue_ellipse.svg" alt="red ellipse" style="margin: 0 8px 3px 0" />
+          <img src="/images/blue_ellipse.svg" alt="red ellipse" class="circle-item"/>
           {{ record.status }}
         </div>
       </template>
       <template v-else-if="column.key === 'start_date'">
-        <div style="text-align: center" >
+        <div class="text-align-center">
           {{ new Date(record.start_date).toLocaleDateString() }}
         </div>
       </template>
       <template v-else-if="column.key === 'end_date'">
-        <div style="text-align: center" >
+        <div class="text-align-center">
           {{ new Date(record.end_date).toLocaleDateString() }}
         </div>
       </template>
       <template v-else-if="column.key === 'documents'">
-        <div style="display: flex; align-items: center">
+        <div class="document-item">
           <img src="/images/docs.svg" alt="docs" />&nbsp;
           <Span className="blue-span-16">{{ record.documents.length }}</Span>
         </div>
@@ -85,7 +85,7 @@ import store from "@/store";
 import { ILease, LeaseStatus } from "@/models/Lease";
 import { IPageSettings } from "@/services/types";
 import { columns } from "@/views/Lease/columns";
-import Span from "@/components/ui/Span.vue"
+import Span from "@/components/ui/Span.vue";
 
 export default defineComponent({
   name: "lease-table",
@@ -97,7 +97,7 @@ export default defineComponent({
   },
   emits: ["change-page", "edit-lease", "delete-lease"],
   components: {
-    Span
+    Span,
   },
   setup(props, { emit }) {
     const leases = computed<ILease[]>(() => store.state.leases.leases);
@@ -117,8 +117,12 @@ export default defineComponent({
           { style: "color:red;" },
           "The lease will be removed with related documents immediately."
         ),
-        onOk() { emit("delete-lease", id); },
-        onCancel() { console.log("Cancel"); },
+        onOk() {
+          emit("delete-lease", id);
+        },
+        onCancel() {
+          console.log("Cancel");
+        },
       });
     }
 
@@ -127,10 +131,22 @@ export default defineComponent({
     }
 
     return {
-      columns, leases, total, LeaseStatus,
-      onChangePage, pageSettings,
-      onEdit, onDelete
+      columns,
+      leases,
+      total,
+      LeaseStatus,
+      onChangePage,
+      pageSettings,
+      onEdit,
+      onDelete,
     };
   },
 });
 </script>
+
+<style scoped>
+.document-item {
+  display: flex;
+  align-items: center;
+}
+</style>

@@ -10,7 +10,7 @@
       </div>
     </div>
     <div>
-      <a-button @click="showReview" type="primary" shape="round" size="small" style="margin-top: 10px; background: #1976d2; width: 73px">
+      <a-button @click="showReview" type="primary" shape="round" size="small" class="review-button">
         <Span className="white-span-12">Review</Span>
       </a-button>
     </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from "vue";
 import Span from "@/components/ui/Span.vue";
 import { IDashboardReportItem } from "@/models/Dashboard";
 
@@ -35,19 +35,29 @@ export default defineComponent({
   methods: {
     showReview() {
       alert("Show Review button is not implemented yet.");
-    }
-  }
-})
+    },
+  },
+});
 </script>
 
 
 <style scoped>
 .report-item {
-  display: flex; 
+  display: flex;
   justify-content: space-between;
   padding: 8px 16px;
   margin: 4px 0;
-  background: linear-gradient(0deg, rgba(255, 180, 0, 0.1), rgba(255, 180, 0, 0.1)), #FFFFFF;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 180, 0, 0.1),
+      rgba(255, 180, 0, 0.1)
+    ),
+    #ffffff;
   border-radius: 10px;
+}
+.review-button {
+  margin-top: 10px;
+  background: #1976d2;
+  width: 73px;
 }
 </style>

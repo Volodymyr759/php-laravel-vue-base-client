@@ -29,7 +29,7 @@
         :destroyOnClose="true"
       >
         <property-form 
-          :property="currentProperty" 
+          :property="currentProperty || undefined" 
           @submit-propertyform="(property) => onSubmitProperty(property)"
           @close-propertyform="visible = false"
         />
@@ -68,7 +68,7 @@ export default defineComponent({
     }
     
     // form
-    const currentProperty: Ref<IProperty | null> = ref(null);
+    const currentProperty: Ref<IEditCreatePropertyDto | null> = ref(null);
     const visible = ref<boolean>(false);
 
     function onAddProperty(): void {
@@ -82,8 +82,20 @@ export default defineComponent({
     }
 
     // actions
+    // function onEditProperty(property: IProperty): void {
+    //   currentProperty.value=property;
+    //   visible.value=true;
+    // }
     function onEditProperty(property: IProperty): void {
-      currentProperty.value=property;
+      currentProperty.value={
+        id: property.id, 
+        address: property.address, 
+        status: property.status, 
+        baths: property.baths,
+        beds: property.beds,
+        square: property.square,
+        price: property.price
+      };
       visible.value=true;
     }
     function onDeleteProperty(id: number): void {

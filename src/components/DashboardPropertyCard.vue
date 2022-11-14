@@ -1,7 +1,7 @@
 <template>
   <a-col class="dashboard-column" :xs="24" :md="11" :lg="11">
     <div>
-      <img src="/images/test_property1.png" alt="property photo" class="dashboard-card-image" />
+      <img :src="property.images[0].fullPath" alt="property photo" class="dashboard-card-image" />
       <br />
       <img src="/images/home_dashboard.svg" alt="home icon" class="card-icon"/>
       <Span className="gray80-span-16">

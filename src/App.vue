@@ -1,8 +1,4 @@
 <template>
-  <!-- <component :is="layout" v-bind="title">
-    <router-view />
-  </component> -->
-
   <public-layout v-if="layout">
     <router-view />
   </public-layout>
@@ -13,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import PublicLayout from "./layouts/PublicLayout.vue";
+import PublicLayout from "@/layouts/PublicLayout.vue";
 import MainLayout from "@/layouts/MainLayout.vue";
 
 export default defineComponent({
@@ -22,7 +18,7 @@ export default defineComponent({
       return this.$route.meta.layout === "public-layout";
     },
     title() {
-      return this.$route.meta.title;
+      return typeof this.$route.meta.title === 'string' ? this.$route.meta.title : 'Admin';
     },
   },
   components: {

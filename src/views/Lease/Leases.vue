@@ -33,7 +33,7 @@
           :destroyOnClose="true"
         >
           <lease-form
-            :lease="currentLease"
+            :lease="currentLease ? currentLease : undefined"
             @submit-leaseform="(lease) => onSubmitLease(lease)"
             @close-leaseform="visible = false"
           />

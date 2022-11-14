@@ -122,6 +122,7 @@ import DashboardApplicationItem from "@/components/DashboardApplicationItem.vue"
 import { Button, Span, Spin } from "@/components/ui";
 import StatCard from "@/components/StatCard.vue";
 import { ServiseFactory } from "@/services/ServiseFactory";
+import { IProperty } from "@/models/Property";
 
 const statisticNumbers = [
   { title: "Active Leases", amount: 15 },
@@ -130,11 +131,18 @@ const statisticNumbers = [
   { title: "New Requests", amount: 1 },
 ];
 
-const properties = [
+const properties: IProperty[] = [
   {
-    id: "1",
-    imgSrc: "/images/test_property1.png",
-    name: "Maldives",
+    id: 1,
+    images: [
+      {
+        id: 1111,
+        propertyId: 1,
+        name: 'Maldives',
+        fullPath: "/images/test_property1.png"
+      }
+    ],
+    leases: [],
     address: "Crown Beach House Maldives",
     status: "Available Now",
     baths: 1,
@@ -143,9 +151,16 @@ const properties = [
     price: 598,
   },
   {
-    id: "2",
-    imgSrc: "/images/test_property2.png",
-    name: "Maldives",
+    id: 2,
+    images: [
+      {
+        id: 1112,
+        propertyId: 2,
+        name: 'Maldives',
+        fullPath: "/images/test_property2.png"
+      }
+    ],
+    leases: [],
     address: "Crown Beach House Maldives",
     status: "Available Now",
     baths: 1,

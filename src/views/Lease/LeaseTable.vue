@@ -66,7 +66,7 @@
       </template>
     </template>
   </a-table>
-  <div>
+  <div class="pagination-wrapper">
     <a-pagination
       size="small"
       v-model:current="pageSettings.pagination.current_page"
@@ -138,7 +138,7 @@ export default defineComponent({
       onChangePage,
       pageSettings,
       onEdit,
-      onDelete,
+      onDelete
     };
   },
 });

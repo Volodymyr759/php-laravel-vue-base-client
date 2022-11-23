@@ -5,30 +5,31 @@ import { LeaseService } from "@/services/LeaseService";
 import { NotificationService } from "@/services/NotificationService";
 import { PropertyService } from "@/services/PropertyService";
 import { TenantService } from "@/services/TenantService";
+import { ILeaseService, INotificationService, IPropertyService, ITenantService } from "./types";
 
 export class ServiseFactory {
   // singletons
-  private static instanceOfLeaseService: LeaseService;
-  private static instanceOfNotificationService: NotificationService;
-  private static instanceOfPropertyService: PropertyService;
-  private static instanceOfTenantService: TenantService;
+  private static instanceOfLeaseService: ILeaseService;
+  private static instanceOfNotificationService: INotificationService;
+  private static instanceOfPropertyService: IPropertyService;
+  private static instanceOfTenantService: ITenantService;
 
-  public static getLeaseServise(): LeaseService {
+  public static getLeaseServise(): ILeaseService {
     if (!this.instanceOfLeaseService) this.instanceOfLeaseService = new LeaseService();
     return this.instanceOfLeaseService;
   }
 
-  public static getNotificationServise(): NotificationService {
+  public static getNotificationServise(): INotificationService {
     if (!this.instanceOfNotificationService) this.instanceOfNotificationService = new NotificationService();
     return this.instanceOfNotificationService;
   }
 
-  public static getfPropertyServise(): PropertyService {
+  public static getfPropertyServise(): IPropertyService {
     if (!this.instanceOfPropertyService) this.instanceOfPropertyService = new PropertyService();
     return this.instanceOfPropertyService;
   }
 
-  public static getTenantsServise(): TenantService {
+  public static getTenantsServise(): ITenantService {
     if (!this.instanceOfTenantService) this.instanceOfTenantService = new TenantService();
     return this.instanceOfTenantService;
   }

@@ -1,9 +1,9 @@
-import { ActionType } from "./types";
+import { ActionType, ITenantService } from "./types";
 import { BaseServise } from "@/services/BaseServise";
 import { IEditCreateTenantDto, ISearchTenantByFullName } from "@/models/Tenant";
 import { searchTenantsAxios } from "@/api/tenants";
 
-export class TenantService extends BaseServise {
+export class TenantService extends BaseServise implements ITenantService {
   constructor(){
     super( 
       [{ field: 'first_name', value: '' }], 

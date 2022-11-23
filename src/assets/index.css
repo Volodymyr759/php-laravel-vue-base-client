@@ -72,6 +72,12 @@ nav {
   min-height: 100vh;
 }
 
+.pagination-wrapper {
+  display: flex; 
+  justify-content: center; 
+  margin: 15px 0;
+}
+
 .functional-section {
   border: 1px solid gray;
   margin: 8px;

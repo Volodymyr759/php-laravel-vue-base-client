@@ -1,9 +1,9 @@
-import { ActionType } from "./types";
+import { ActionType, IPropertyService } from "./types";
 import { BaseServise } from "@/services/BaseServise";
 import { IEditCreatePropertyDto, ISearchPropertyByAddressDto } from "@/models/Property";
 import { searchPropertiesAxios } from "@/api/properties";
 
-export class PropertyService extends BaseServise {
+export class PropertyService extends BaseServise implements IPropertyService{
   constructor(){
     super( [
       { field: 'address', value: '' }, { field: 'status', value: '' }], // filtering

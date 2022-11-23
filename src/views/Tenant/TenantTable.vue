@@ -39,7 +39,7 @@
     </template>
   </a-table>
 
-  <div>
+  <div class="pagination-wrapper">
     <a-pagination size="small" 
       v-model:current="pageSettings.pagination.current_page"
       :page-size="pageSettings.pagination.per_page" 
@@ -102,3 +102,4 @@ export default defineComponent({
   },
 });
 </script>
+

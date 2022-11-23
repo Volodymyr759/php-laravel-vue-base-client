@@ -1,8 +1,8 @@
-import { ActionType } from "./types";
+import { ActionType, ILeaseService } from "./types";
 import { BaseServise } from "@/services/BaseServise";
 import { IEditCreateLeaseDto } from "@/models/Lease";
 
-export class LeaseService extends BaseServise {
+export class LeaseService extends BaseServise implements ILeaseService {
   constructor(){
     super( 
       [{ field: 'address', value: '' }, { field: 'status', value: '' }], 
@@ -12,7 +12,7 @@ export class LeaseService extends BaseServise {
   }
 
   getAll = () => this.getDataAndSaveToStore(ActionType.LeasesGet);
-  delete = (id: number) => this.getDataAndSaveToStore(ActionType.LeaseDelete, id);
+  delete = (id: number): Promise<void> => this.getDataAndSaveToStore(ActionType.LeaseDelete, id);
 
   create = (editCreateLeaseDto: IEditCreateLeaseDto): Promise<void> => this.getDataAndSaveToStore(ActionType.LeaseCreate, editCreateLeaseDto);
   update = (editCreateLeaseDto: IEditCreateLeaseDto): Promise<void> => this.getDataAndSaveToStore(ActionType.LeaseUpdate, editCreateLeaseDto);

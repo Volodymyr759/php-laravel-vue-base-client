@@ -25,13 +25,13 @@
 <script lang="ts">
 import { defineComponent, PropType, reactive } from "vue";
 import { ServiseFactory } from "@/services/ServiseFactory";
-import { IEditCreateTenantDto } from "@/models/Tenant";
+import { IEditCreateTenantDto, ITenant } from "@/models/Tenant";
 
 export default defineComponent({
   name: "tenant-form",
   props: {
     tenant: {
-      type: Object as PropType<IEditCreateTenantDto> || null,
+      type: Object as PropType<ITenant> || null,
       required: false
     }
   },

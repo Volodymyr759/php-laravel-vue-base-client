@@ -1,7 +1,7 @@
-import { ActionType } from "./types";
+import { ActionType, INotificationService } from "./types";
 import { BaseServise } from "@/services/BaseServise";
 
-export class NotificationService extends BaseServise {
+export class NotificationService extends BaseServise implements INotificationService {
   constructor(){
     super(
       [], 

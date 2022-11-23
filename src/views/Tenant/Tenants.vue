@@ -28,7 +28,7 @@
           :destroyOnClose="true"
         >
           <tenant-form
-            :tenant="currentTenant"
+            :tenant="currentTenant ? currentTenant : undefined"
             @submit-tenantform="(tenant) => onSubmitTenant(tenant)"
             @close-tenantform="visible = false"
           />
